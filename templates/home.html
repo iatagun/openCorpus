@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corpus Platformu - Akademik Arastirma ve Derleme Sistemi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #2c3e50;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 2px solid #2c3e50;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #2c3e50;
+            margin-bottom: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            width: 100%;
+            margin: 3rem 0;
+            padding: 0 3rem;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-top: 3px solid #2c3e50;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-box .number {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box .label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-section {
+            background: white;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-section h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .features-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            padding: 1.5rem;
+            background: #fafafa;
+            border-left: 3px solid #95a5a6;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #7f8c8d;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .cta-section h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            margin: 0.5rem;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: #2c3e50;
+            color: white;
+            border: 2px solid #2c3e50;
+        }
+
+        .btn-primary:hover {
+            background: #34495e;
+            border-color: #34495e;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #2c3e50;
+            border: 2px solid #2c3e50;
+        }
+
+        .btn-secondary:hover {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .footer {
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+            color: #95a5a6;
+        }
+
+        .roles-section {
+            background: #fafafa;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 3px solid #2c3e50;
+        }
+
+        .roles-section h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .role-badge {
+            padding: 1rem;
+            background: white;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .role-badge strong {
+            display: block;
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .role-badge span {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Corpus Platformu</h1>
+        <p>Akademik Arastirma ve Derleme Sistemi</p>
+    </div>
+
+    <div class="container">
+        <div class="stats-section">
+            <div class="stat-box">
+                <div class="number">{{ total_documents }}</div>
+                <div class="label">Dokuman</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">{{ total_categories }}</div>
+                <div class="label">Kategori</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">{{ total_compilations }}</div>
+                <div class="label">Derleme</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">{{ total_users }}</div>
+                <div class="label">Arastirmaci</div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Platform Hakkinda</h2>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: #555; margin-bottom: 2rem;">
+                Corpus Platformu, akademik arastirmalar, dilbilimsel calismalar ve dokuman derlemeleri icin
+                gelistirilmis guvenli bir alisveris sistemidir. Platform, farkli kullanici turleri icin
+                ozel olarak tasarlanmis rol bazli erisim kontrolu saglar.
+            </p>
+
+            <div class="roles-section">
+                <h3>Kullanici Rolleri</h3>
+                <div class="roles-grid">
+                    <div class="role-badge">
+                        <strong>Yonetici</strong>
+                        <span>Sistem yonetimi ve kullanici onaylari</span>
+                    </div>
+                    <div class="role-badge">
+                        <strong>Duzenlayici</strong>
+                        <span>Dokuman yukleme ve duzenleme</span>
+                    </div>
+                    <div class="role-badge">
+                        <strong>Arastirmaci</strong>
+                        <span>Corpus erisimi ve analiz</span>
+                    </div>
+                    <div class="role-badge">
+                        <strong>Goruntuleyici</strong>
+                        <span>Sadece okuma yetkisi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Platform Ozellikleri</h2>
+            <ul class="features-list">
+                <li class="feature-item">
+                    <h3>Guvenli Erisim</h3>
+                    <p>Argon2 sifreleme, brute force korumasi ve detayli audit logging ile guvenlik</p>
+                </li>
+                <li class="feature-item">
+                    <h3>Rol Bazli Yetkilendirme</h3>
+                    <p>Her kullanici turu icin ozel erisim kontrolleri ve yetkiler</p>
+                </li>
+                <li class="feature-item">
+                    <h3>Dokuman Yonetimi</h3>
+                    <p>Coklu format destegi, kategorizasyon ve versiyon kontrolu</p>
+                </li>
+                <li class="feature-item">
+                    <h3>Derleme Sistemi</h3>
+                    <p>Dokumanlari koleksiyonlarda organize etme ve paylasma</p>
+                </li>
+                <li class="feature-item">
+                    <h3>Arama ve Filtreleme</h3>
+                    <p>Gelismis arama algoritmalari ile hizli erisim</p>
+                </li>
+                <li class="feature-item">
+                    <h3>KVKK Uyumlu</h3>
+                    <p>Tum kullanici islemleri kayit altinda ve denetlenebilir</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h2>Platforma Giris Yapin</h2>
+            <p style="color: #7f8c8d; margin-bottom: 2rem;">
+                Sisteme erisim icin kullanici kimlik bilgileriniz ile giris yapin
+            </p>
+            <a href="{% url 'accounts:login' %}" class="btn btn-primary">Giris Yap</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Devlet Kurumu &bull; Corpus Platformu &bull; Akademik Arastirma Sistemi</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">Django 4.2.11 LTS &bull; Enterprise Security</p>
+    </div>
+</body>
+
+</html>

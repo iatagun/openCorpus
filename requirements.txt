@@ -1,0 +1,33 @@
+# Django Corpus Compilation Platform - Government Institution
+# Base Requirements
+
+# Django
+Django==4.2.11
+
+# Database
+mysqlclient==2.2.1
+
+# Security
+django-environ==0.11.2
+cryptography==42.0.2
+argon2-cffi==23.1.0
+
+# API
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
+
+# Security & Rate Limiting
+django-ratelimit==4.1.0
+django-axes==6.1.1
+
+# File handling
+python-magic==0.4.27
+python-magic-bin==0.4.14  # Windows support
+
+# Forms & Validation
+django-crispy-forms==2.1
+crispy-bootstrap4==2.0
+
+# Utilities
+Pillow==10.2.0
+python-dateutil==2.8.2

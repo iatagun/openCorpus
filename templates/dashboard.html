@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Corpus Platformu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #2c3e50;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #2c3e50;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-left: 1.5rem;
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .user-role {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+            background: #ecf0f1;
+            color: #2c3e50;
+            border-radius: 3px;
+        }
+
+        .container {
+            width: 100%;
+            margin: 2rem 0;
+            padding: 0 3rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #2c3e50;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #2c3e50;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-left: 3px solid #2c3e50;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .document-list {
+            list-style: none;
+        }
+
+        .document-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .document-item:last-child {
+            border-bottom: none;
+        }
+
+        .document-title {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .document-meta {
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #34495e;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #2c3e50;
+            border: 1px solid #2c3e50;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="{% url 'corpus:home' %}" class="navbar-brand">Corpus Platformu</a>
+        <div class="navbar-menu">
+            <a href="{% url 'corpus:dashboard' %}" class="nav-link">Dashboard</a>
+            {% if user.role == 'ADMIN' %}
+            <a href="/admin/" class="nav-link">Yonetim</a>
+            {% endif %}
+            <div class="user-info">
+                <span>{{ user.get_full_name|default:user.username }}</span>
+                <span class="user-role">{{ user.get_role_display }}</span>
+                <a href="{% url 'accounts:logout' %}" class="nav-link">Cikis</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Hosgeldiniz, {{ user.get_full_name|default:user.username }}</h1>
+        </div>
+
+        <div class="stats-grid">
+            {% if user.role == 'ADMIN' %}
+            <div class="stat-card">
+                <div class="number">{{ pending_users }}</div>
+                <div class="label">Onay Bekleyen Kullanici</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">{{ pending_documents }}</div>
+                <div class="label">Onay Bekleyen Dokuman</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">{{ total_users }}</div>
+                <div class="label">Toplam Kullanici</div>
+            </div>
+            {% elif user.role == 'EDITOR' %}
+            <div class="stat-card">
+                <div class="number">{{ my_documents }}</div>
+                <div class="label">Belgelerim</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">{{ pending_documents }}</div>
+                <div class="label">Onay Bekleyen</div>
+            </div>
+            {% elif user.role == 'RESEARCHER' %}
+            <div class="stat-card">
+                <div class="number">{{ available_compilations }}</div>
+                <div class="label">Erislebilir Derlemeler</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">{{ total_documents }}</div>
+                <div class="label">Toplam Dokuman</div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <h2 class="section-header">Son Dokumanlar</h2>
+            {% if recent_documents %}
+            <ul class="document-list">
+                {% for doc in recent_documents %}
+                <li class="document-item">
+                    <div class="document-title">{{ doc.title }}</div>
+                    <div class="document-meta">
+                        {{ doc.category.name|default:"Kategorisiz" }} &bull;
+                        {{ doc.created_at|date:"d F Y" }} &bull;
+                        {{ doc.get_status_display }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="empty-state">
+                <p>Henuz dokuman bulunmamaktadir.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if user_compilations %}
+        <div class="section">
+            <h2 class="section-header">Derlemelerim</h2>
+            <ul class="document-list">
+                {% for comp in user_compilations %}
+                <li class="document-item">
+                    <div class="document-title">{{ comp.name }}</div>
+                    <div class="document-meta">
+                        {{ comp.total_documents }} dokuman &bull;
+                        {{ comp.created_at|date:"d F Y" }}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
